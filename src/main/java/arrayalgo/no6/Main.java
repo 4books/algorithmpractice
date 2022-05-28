@@ -54,7 +54,7 @@ public class Main {
             //123이면
             //1번째 t = 3, res = 0 * 10 + 3 (res = 3)
             //2번째 t = 2, res = 3 * 10 + 2 (res = 32)
-            //3번째 t = 1, res = 32 * 10 + 2 (res = 321)
+            //3번째 t = 1, res = 32 * 10 + 1 (res = 321)
             int res = 0;
             while (tmp > 0) {
                 int t = tmp % 10;

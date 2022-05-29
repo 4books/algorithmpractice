@@ -1,4 +1,4 @@
-package arrayalgo.no5.no3;
+package arrayalgo.no3;
 
 /*
 3. 가위 바위 보

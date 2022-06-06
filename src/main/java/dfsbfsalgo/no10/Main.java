@@ -1,11 +1,14 @@
-package dfsbfsalgo.no7;
+package dfsbfsalgo.no10;
 /*
-이진트리 순회(넓이우선탐색 : 레벨탐색)
-아래 그림과 같은 이진트리를 레벨탐색 연습하세요.
+Tree 말단 노드까지의 가장 짧은 경로
+아래 그림과 같은 이진트리에서 루트 노드 1에서 말단노드까지의 길이 중 가장 짧은 길이를
+구하는 프로그램을 작성하세요.
+각 경로의 길이는 루트노드에서 말단노드까지 가는데 이동하는 횟수를 즉 간선(에지)의 개수를
+길이로 하겠습니다.
 1
 2 3
-4 5 6 7
-레벨 탐색 순회 출력 : 1 2 3 4 5 6 7
+4 5
+가장 짧은 길이는 3번 노느까지의 길이인 1이다.
  */
 
 import dfsbfsalgo.Node;
@@ -14,38 +17,36 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
-
 public class Main {
 
-    public static void bfs(Node root, StringBuilder answer) {
+    public static int bfs(Node root) {
         Queue<Node> queue = new LinkedList<>();
+
         queue.offer(root);
         int level = 0;
 
         while (!queue.isEmpty()) {
             int length = queue.size();
-            answer.append(level).append(" level : ");
             for (int i = 0; i < length; i++) {
-                Node curr = queue.poll();
-                answer.append(curr.value).append(" ");
-                if (curr.left != null) {
-                    queue.offer(curr.left);
+                Node currNode = queue.poll();
+                if (currNode.left == null && currNode.right == null) {
+                    return level;
                 }
-                if (curr.right != null) {
-                    queue.offer(curr.right);
+                if (currNode.left != null) {
+                    queue.offer(currNode.left);
+                }
+                if (currNode.right != null) {
+                    queue.offer(currNode.right);
                 }
             }
             level++;
-            answer.append("\n");
         }
+
+        return 0;
     }
 
     public static String solution(Node root) {
-        StringBuilder answer = new StringBuilder();
-        bfs(root, answer);
-
-        return answer.toString();
+        return String.valueOf(bfs(root));
     }
 
 
@@ -53,14 +54,14 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         Node root = new Node(1);
         root.left = new Node(2);
         root.left.left = new Node(4);
+        root.left.left.left = new Node(7);
         root.left.right = new Node(5);
-        root.left.left.left = new Node(10);
         root.right = new Node(3);
         root.right.left = new Node(6);
-        root.right.right = new Node(7);
 
         bw.write(solution(root));
         bw.flush();

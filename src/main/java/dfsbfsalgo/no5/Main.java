@@ -11,17 +11,13 @@ package dfsbfsalgo.no5;
 후위순회 출력 : 4 5 2 6 7 3 1
  */
 
+
+
+import dfsbfsalgo.Node;
+
 import java.io.*;
 
-class Node {
-    int value;
-    Node left, right;
 
-    public Node(int value) {
-        this.value = value;
-        left = right = null;
-    }
-}
 
 public class Main {
 

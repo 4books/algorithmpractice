@@ -6,7 +6,7 @@ import java.io.*;
 
 public class Main {
 
-    public static String solution(int n, String input){
+    public static String solution(int n, String input) {
         StringBuilder answer = new StringBuilder();
 
         return null;

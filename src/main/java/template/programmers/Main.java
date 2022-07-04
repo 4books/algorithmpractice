@@ -3,19 +3,18 @@ package template.programmers;
 
  */
 
+class Solution {
+    public int solution(int[] nums) {
+
+        int answer = 0;
+
+        return answer;
+    }
+
+}
 
 public class Main {
 
-
-    static class Solution {
-        public int solution(int[] nums) {
-
-            int answer = 0;
-
-            return answer;
-        }
-
-    }
 
     public static void main(String[] args) {
 

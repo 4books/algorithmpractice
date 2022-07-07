@@ -22,7 +22,6 @@ public class Main {
 
 
 //        bw.write(solution());
-        bw.flush();
         bw.close();
     }
 

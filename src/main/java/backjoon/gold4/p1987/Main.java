@@ -1,4 +1,4 @@
-package backjoon.p1987;
+package backjoon.gold4.p1987;
 
 /*
 알파벳 다국어

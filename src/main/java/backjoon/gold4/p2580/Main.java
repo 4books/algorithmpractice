@@ -1,4 +1,4 @@
-package backjoon.p2580;
+package backjoon.gold4.p2580;
 
 /*
 

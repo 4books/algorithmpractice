@@ -1,4 +1,4 @@
-package backjoon.p1759;
+package backjoon.gold5.p1759;
 
 /*
 문제

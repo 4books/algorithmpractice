@@ -1,4 +1,4 @@
-package backjoon.p2583;
+package backjoon.silver1.p2583;
 
 /*
 문제

@@ -1,4 +1,4 @@
-package backjoon.p2667;
+package backjoon.silver1.p2667;
 
 import java.io.*;
 import java.util.ArrayList;

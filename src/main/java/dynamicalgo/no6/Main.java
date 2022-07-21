@@ -53,8 +53,8 @@ public class Main {
         int[] dy = new int[m + 1];//제한 시간 배열 i 값이 시간이다.
         for (int i = 0; i < n; i++) {
             tmp = br.readLine().split(" ");
-            int ps = Integer.parseInt(tmp[0]);
-            int pt = Integer.parseInt(tmp[1]);
+            int ps = Integer.parseInt(tmp[0]); //풀었을때 점수
+            int pt = Integer.parseInt(tmp[1]); //풀기 위한 시간
 
             //중복이 가능할때는 시작부터..
             //지금 처럼 중복이 불가 할땐 뒤에서 부터..

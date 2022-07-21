@@ -35,46 +35,49 @@ public class Main {
             queue.offer(exp[i]);
         }
 
-        Map<Character, Integer> replaceMap = new HashMap<>();
+        Map<Character, Double> replaceMap = new HashMap<>();
 
         for (int i = 0; i < N; i++) {
-            replaceMap.put(alphabet.charAt(i), Integer.parseInt(br.readLine()));
+            replaceMap.put(alphabet.charAt(i), Double.parseDouble(br.readLine()));
         }
 
-        Stack<Integer> stack = new Stack<>();
+        Stack<Double> stack = new Stack<>();
 
         while (!queue.isEmpty()) {
             char c = queue.poll();
             if (c >= 65 && c <= 90) {
                 stack.push(replaceMap.get(c));
             } else {
-                int num1 = stack.pop();
-                int num2 = stack.pop();
-                int result = cal(num1, c, num2);
+                double num2 = stack.pop();
+                double num1 = stack.pop();
+                double result = cal(num1, c, num2);
                 stack.push(result);
             }
         }
 
-        System.out.println(String.format("%.2f", (double)stack.pop()));
+        System.out.println(String.format("%.2f", stack.pop()));
     }
 
-    private static int cal(int num1, char c, int num2) {
-        switch (c){
+    private static double cal(double num1, char c, double num2) {
+        double r = 0;
+        switch (c) {
             case '+':
-                return num1 + num2;
+                r = num1 + num2;
+                break;
             case '-':
-                return num1 - num2;
+                r = num1 - num2;
+                break;
             case '*':
-                return num1 * num2;
+                r = num1 * num2;
+                break;
             default:
-                if(num2 != 0){
-                    return num1 / num2;
+                if (num2 != 0) {
+                    r = num1 / num2;
                 }
-                return 0;
+                break;
         }
+        return r;
     }
-
-
 }
 
 

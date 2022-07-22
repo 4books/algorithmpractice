@@ -52,6 +52,16 @@ public class Main {
         }
     }
 
+    static class History {
+        int[][] map;
+        boolean[][] visited;
+
+        public History(int[][] map, boolean[][] visited) {
+            this.map = map;
+            this.visited = visited;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -86,20 +96,20 @@ public class Main {
             //2. 1번 반대
             //3. 외부에서 둘다 데리고 옴
 
-            int[][] first = bfs(prisoners[0]);
-            int[][] second = bfs(prisoners[1]);
-            int[][] third = bfs(prisoners[2]);
+            History first = bfs(prisoners[0]);
+            History second = bfs(prisoners[1]);
+            History third = bfs(prisoners[2]);
 
             sb.append(getMinSum(first, second, third, jail)).append("\n");
 
         } //테스트 케이스 끝
 
-        System.out.println(sb);
+        System.out.print(sb);
 
 
     } //END of Main Method
 
-    private static int[][] bfs(Point point) {
+    private static History bfs(Point point) {
 
         //문 연 횟수가 적은 것부터 탐색 해야함
         PriorityQueue<Point> pq = new PriorityQueue<>();
@@ -125,25 +135,29 @@ public class Main {
                 pq.offer(new Point(nRow, nCol, nextCnt));
             }
         }
-        return dp;
+
+        return new History(dp, visited);
     }
 
-    private static int getMinSum(int[][] first, int[][] second, int[][] third, char[][] jail) {
+    private static int getMinSum(History first, History second, History third, char[][] jail) {
         int min = Integer.MAX_VALUE;
 
         for (int i = 0; i < R + 2; i++) {
             for (int j = 0; j < C + 2; j++) {
-                if (jail[i][j] == WALL) {
+                if (jail[i][j] == WALL || jail[i][j] == 0) { //0 == 바깥
                     continue;
                 }
-                if(first[i][j] != -1 && second[i][j] != -1 && third[i][j] != -1){
-                    int sum = first[i][j] + second[i][j] + third[i][j];
-                    if (jail[i][j] == DOOR) {
-                        //한사람만 열면 됨
-                        sum -= 2;
-                    }
-                    min = Math.min(min, sum);
+                //셋 다 방문한 곳이어야함
+                if(!first.visited[i][j] || !second.visited[i][j] || !third.visited[i][j]){
+                    continue;
                 }
+                int sum = first.map[i][j] + second.map[i][j] + third.map[i][j];
+
+                if (jail[i][j] == DOOR) {
+                    //한사람만 열면 됨
+                    sum -= 2;
+                }
+                min = Math.min(min, sum);
             }
         }
         return min;

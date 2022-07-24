@@ -23,7 +23,27 @@ import java.util.*;
 
 public class Main {
 
+    static int[] unf;
     static String[] know;
+
+    static int find(int v) {
+        if (v == unf[v]) {
+            return v;
+        } else {
+            return unf[v] = find(unf[v]);
+        }
+    }
+
+    static void union(int a, int b) {
+        int fa = find(a);
+        int fb = find(b);
+        if (fa > fb) { //같은 집합 번호로 맞추기 위해
+            unf[fa] = fb;
+        } else {
+            unf[fb] = fa;
+        }
+    }
+
 
     public static void main(String[] args) throws IOException {
 
@@ -33,47 +53,64 @@ public class Main {
         int N = Integer.parseInt(st.nextToken()); //사람 수
         int M = Integer.parseInt(st.nextToken()); //파티 수
 
-        //사람 그래프
-        Set[] graph = new Set[N + 1];
-        for (int i = 0; i <= N; i++) {
-            graph[i] = new TreeSet<Integer>();
-        }
 
         //둘째 줄에는 이야기의 진실을 아는 사람의 수와 번호가 주어진다.
         know = br.readLine().split(" ");
-        for (int i = 1; i < Integer.parseInt(know[0]) - 1; i++) {
-            int p1 = Integer.parseInt(know[i]);
-            int p2 = Integer.parseInt(know[i + 1]);
-
-            graph[p1].add(p2);
-            graph[p2].add(p1);
+        //아는 사람이 없다면 모든 파티 거짓말 가능
+        if (know[0].equals("0")) {
+            for (int i = 0; i < M; i++) {
+                br.readLine();//시스템상 입력되는거 그냥 던짐
+            }
+            System.out.println(M);
+            System.exit(0);
         }
+
+        //Union find
+        unf = new int[N + 1];
+        for (int i = 0; i <= N; i++) {
+            unf[i] = i;
+        }
+
+        for (int p = 1; p < Integer.parseInt(know[0]); p++) {
+            int p1 = Integer.parseInt(know[p]);
+            int p2 = Integer.parseInt(know[p + 1]);
+            union(p1, p2);
+        }
+
+        int[] party = new int[M];
 
         //셋째 줄부터 M개의 줄에는 각 파티마다 오는 사람의 수와 번호
-        for (int p = 0; p < M; p++) {
-            know = br.readLine().split(" ");
-            for (int i = 1; i < Integer.parseInt(know[0]) - 1; i++) {
-                int p1 = Integer.parseInt(know[i]);
-                int p2 = Integer.parseInt(know[i + 1]);
-
-                if (!graph[p1].isEmpty() || !graph[p2].isEmpty()) {
-                    graph[p1].add(p2);
-                    graph[p2].add(p1);
+        for (int m = 0; m < M; m++) {
+            String[] attend = br.readLine().split(" ");
+            int cnt = Integer.parseInt(attend[0]);
+            int p1 = 0, p2;
+            if (cnt == 1) {
+                p1 = Integer.parseInt(attend[1]);
+                find(p1);
+            } else {
+                for (int p = 1; p < Integer.parseInt(attend[0]); p++) {
+                    p1 = Integer.parseInt(attend[p]);
+                    p2 = Integer.parseInt(attend[p + 1]);
+                    union(p1, p2);
                 }
             }
+            //한명만 찾으면 됨.
+            //만약 같은 파티에 진실을 아는 사람이 있을 경우 같은 집합으로 묶였음
+            party[m] = p1;
         }
 
+        int knowSet = find(Integer.parseInt(know[1]));
         int answer = 0;
-        for (int i = 1; i < N + 1; i++) {
-            if(graph[i].isEmpty()){
+        for (int m = 0; m < M; m++) {
+            int group = find(party[m]);
+            if (knowSet != group) {
                 answer++;
             }
         }
 
         System.out.println(answer);
+
     } //END of Main Method
-
-
 }
 
 

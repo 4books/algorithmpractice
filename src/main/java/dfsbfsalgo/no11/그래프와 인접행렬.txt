@@ -1,5 +1,5 @@
 G = Graph
-V = vertex, node
+V = vertex, road
 E = edge, 간선
 G(V, E)
 V와 E로 만들어진 G이다

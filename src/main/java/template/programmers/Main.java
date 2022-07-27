@@ -20,11 +20,10 @@ public class Main {
 
         Solution s = new Solution();
 
-        int[] a = {1, 2, 3, 4};
+        int answer, expect;
 
-        int answer = s.solution(a);
-        int expect = 1;
-        System.out.println("answer = " + answer);
-        System.out.println("expect = " + expect);
+        answer = s.solution(new int[]{1, 2});
+        expect = 1;
+        System.out.println(answer + " " + expect);
     }
 }

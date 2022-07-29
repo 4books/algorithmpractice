@@ -132,13 +132,13 @@ class Solution {
     private boolean isRotate(ArrayList<Point> empty, ArrayList<Point> block) {
         // 90도씩 회전 시키기
         for (int i = 0; i < 4; i++) {
-            int zeroX = block.get(0).x;
-            int zeroY = block.get(0).y;
+            int minX = block.get(0).x;
+            int minY = block.get(0).y;
 
             // 회전시키면서 좌표가 달라지기 때문에 다시 (0, 0)을 기준으로 블록 좌표를 변경
             for (int j = 0; j < block.size(); j++) {
-                block.get(j).x -= zeroX;
-                block.get(j).y -= zeroY;
+                block.get(j).x -= minX;
+                block.get(j).y -= minY;
             }
 
             boolean isCollect = true;
@@ -221,10 +221,10 @@ public class Main {
 
         int answer, expect;
 
-        answer = s.solution(new int[][]{{1, 1, 0, 0, 1, 0}, {0, 0, 1, 0, 1, 0}, {0, 1, 1, 0, 0, 1}, {1, 1, 0, 1, 1, 1}, {1, 0, 0, 0, 1, 0}, {0, 1, 1, 1, 0, 0}},
-                new int[][]{{1, 0, 0, 1, 1, 0}, {1, 0, 1, 0, 1, 0}, {0, 1, 1, 0, 1, 1}, {0, 0, 1, 0, 0, 0}, {1, 1, 0, 1, 1, 0}, {0, 1, 0, 0, 0, 0}});
-        expect = 14;
-        System.out.println(answer + " " + expect);
+//        answer = s.solution(new int[][]{{1, 1, 0, 0, 1, 0}, {0, 0, 1, 0, 1, 0}, {0, 1, 1, 0, 0, 1}, {1, 1, 0, 1, 1, 1}, {1, 0, 0, 0, 1, 0}, {0, 1, 1, 1, 0, 0}},
+//                new int[][]{{1, 0, 0, 1, 1, 0}, {1, 0, 1, 0, 1, 0}, {0, 1, 1, 0, 1, 1}, {0, 0, 1, 0, 0, 0}, {1, 1, 0, 1, 1, 0}, {0, 1, 0, 0, 0, 0}});
+//        expect = 14;
+//        System.out.println(answer + " " + expect);
 
         answer = s.solution(new int[][]{{0, 0, 0}, {1, 1, 0}, {1, 1, 1}},
                 new int[][]{{1, 1, 1}, {1, 0, 0}, {0, 0, 0}});

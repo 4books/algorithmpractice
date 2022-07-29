@@ -24,6 +24,6 @@ public class Main {
 
         answer = s.solution(new int[]{1, 2});
         expect = 1;
-        System.out.println(answer + " " + expect);
+        System.out.println("result = " + answer + " " + "expect = " + expect);
     }
 }

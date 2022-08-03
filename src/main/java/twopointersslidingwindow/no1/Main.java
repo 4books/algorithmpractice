@@ -1,96 +1,65 @@
 package twopointersslidingwindow.no1;
 
-/*
-1. 두 배열 합치기
-설명
-
-오름차순으로 정렬이 된 두 배열이 주어지면 두 배열을 오름차순으로 합쳐 출력하는 프로그램을 작성하세요.
 
 
-입력
-첫 번째 줄에 첫 번째 배열의 크기 N(1<=N<=100)이 주어집니다.
-
-두 번째 줄에 N개의 배열 원소가 오름차순으로 주어집니다.
-
-세 번째 줄에 두 번째 배열의 크기 M(1<=M<=100)이 주어집니다.
-
-네 번째 줄에 M개의 배열 원소가 오름차순으로 주어집니다.
-
-각 리스트의 원소는 int형 변수의 크기를 넘지 않습니다.
-
-
-출력
-오름차순으로 정렬된 배열을 출력합니다.
-
-
-예시 입력 1
-
-3
-1 3 5
-5
-2 3 6 7 9
-예시 출력 1
-
-1 2 3 3 5 6 7 9
- */
-
-import java.io.*;
+import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStreamReader;
+        import java.util.StringTokenizer;
 
 public class Main {
-
-    public static int[] solution(int n, int[] a, int m, int[] b) {
-        int length = n + m;
-        int[] answer = new int[length];
-
-        int p1 = 0, p2 = 0, i = 0;
-        while (p1 < n && p2 < m) {
-            if (a[p1] < b[p2]) {
-                answer[i++] = a[p1++];
-            } else {
-                answer[i++] = b[p2++];
-            }
-        }
-        while (p1 < n) {
-            answer[i++] = a[p1++];
-        }
-
-        while (p2 < m) {
-            answer[i++] = b[p2++];
-        }
-
-        return answer;
-    }
-
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer tk;
 
-        int n = Integer.parseInt(br.readLine());
-        String[] aS = br.readLine().split(" ");
-
-        int[] a = new int[n];
-        for (int i = 0; i < aS.length; i++) {
-            a[i] = Integer.parseInt(aS[i]);
+        int N = Integer.parseInt(br.readLine());
+        tk = new StringTokenizer(br.readLine());
+        int[] A = new int[N];
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(tk.nextToken());
         }
 
-        int m = Integer.parseInt(br.readLine());
-        String[] bS = br.readLine().split(" ");
-        int[] b = new int[m];
-        for (int i = 0; i < bS.length; i++) {
-            b[i] = Integer.parseInt(bS[i]);
+        int M = Integer.parseInt(br.readLine());
+        tk = new StringTokenizer(br.readLine());
+        int[] B = new int[M];
+        for (int i = 0; i < M; i++) {
+            B[i] = Integer.parseInt(tk.nextToken());
         }
 
-        int[] answer = solution(n, a, m, b);
+        //answer 의 총 길이
+        int total = N + M;
+
+        int[] answer = new int[total];
+
+        //Two Pointer
+        int p1 = 0, p2 = 0, index = 0;
+
+        //먼저 동일한 길이 만큼 answer 에 담는다.
+        while (p1 < N && p2 < M) {
+            if(A[p1] < B[p2]){
+                answer[index++] = A[p1++];
+            } else {
+                answer[index++] = B[p2++];
+            }
+        }
+
+        //둘 중 남은 것을 전부 넣는다.
+        //다 돈 것도 이미 포인트가 해당 배열 길이보다 크기 떄문에 돌지 않는다.
+        while(p1 < N){
+            answer[index++] = A[p1++];
+        }
+        while(p2 < M){
+            answer[index++] = B[p2++];
+        }
 
         StringBuilder sb = new StringBuilder();
-        for (int i : answer) {
-            sb.append(i).append(" ");
+        for (int i = 0; i < total; i++) {
+            sb.append(answer[i] + " ");
         }
+        System.out.println(sb);
 
-        bw.write(sb.toString());
-        bw.flush();
-        bw.close();
-    }
+    } //END of Main Method
 }
+

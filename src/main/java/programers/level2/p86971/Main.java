@@ -64,7 +64,7 @@ class Solution {
 
             //집합 번호 통일
             for (int v = 1; v < unf.length; v++) {
-                find(v);
+                find(v); //그냥 찾으면 find method 를 통해 집합번호가 통일 된다.
             }
 
             int e1 = unf[1];
@@ -94,9 +94,9 @@ public class Main {
 
         int answer, expect;
 
-//        answer = s.solution(9, new int[][]{{1, 3}, {2, 3}, {3, 4}, {4, 5}, {4, 6}, {4, 7}, {7, 8}, {7, 9}});
-//        expect = 3;
-//        System.out.println("result = " + answer + " " + "expect = " + expect);
+        answer = s.solution(9, new int[][]{{1, 3}, {2, 3}, {3, 4}, {4, 5}, {4, 6}, {4, 7}, {7, 8}, {7, 9}});
+        expect = 3;
+        System.out.println("result = " + answer + " " + "expect = " + expect);
 
         answer = s.solution(6, new int[][]{{1, 4}, {6, 3}, {2, 5}, {5, 1}, {5, 3}});
         expect = 2;

@@ -90,8 +90,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             String[] tmp = br.readLine().split(" ");
             for (int j = 0; j < n; j++) {
-                int tmpInt = Integer.parseInt(tmp[j]);
-                board[i][j] = tmpInt;
+                board[i][j] = Integer.parseInt(tmp[j]);
             }
         }
 

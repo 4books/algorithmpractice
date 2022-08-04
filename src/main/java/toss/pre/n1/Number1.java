@@ -97,9 +97,9 @@ class Solution {
                     againRequest[rq] = target;
                 } else {
                     //중복 요청
-                    int oldTarget = againRequest[rq];
-                    list[oldTarget].add(rq);
-                    target = oldTarget;
+                    int preTarget = againRequest[rq];
+                    list[preTarget].add(rq);
+                    target = preTarget;
                 }
             }
 

@@ -6,7 +6,7 @@ package toss.pre.n1;
 import java.util.*;
 
 class Solution {
-    public int[][] solution(int servers, boolean sticky, int[] requests) {
+    public int[][] solution2(int servers, boolean sticky, int[] requests) {
         int[][] answer = new int[servers][];
 
         //서버 리스트
@@ -70,62 +70,51 @@ class Solution {
         return answer;
     }
 
-    public int[][] solution2(int servers, boolean sticky, int[] requests) {
+    public int[][] solution(int servers, boolean sticky, int[] requests) {
         int[][] answer = new int[servers][];
 
         //서버 리스트
-        List<Integer>[] list = new List[servers];
-        for (int i = 0; i < servers; i++) {
+        ArrayList<Integer>[] list = new ArrayList[servers + 1];
+        for (int i = 0; i <= servers; i++) {
             list[i] = new ArrayList<>();
         }
 
-        //round robin
-        if (!sticky) {
-            for (int i = 0; i < requests.length; i++) {
-                int target = i % servers;
-                list[target].add(requests[i]);
-            }
+        int[] againRequest = new int[requests.length + 1];
+        Arrays.fill(againRequest, Integer.MAX_VALUE);
 
-        } else {
+        int target = 1;
+        for (int i = 0; i < requests.length; i++) {
+            int rq = requests[i];
 
-            //TODO Array 로 다시 풀어보기
-
-            int[] targetServers = new int[requests.length];
-            Arrays.fill(targetServers, 987654321);
-
-            int last = 0;
-            for (int i = 0; i < requests.length; i++) {
-                int rq = requests[i];
-
-                if (targetServers[rq] == 987654321) {
+            if (!sticky) {
+                //round robin
+                list[target].add(rq);
+            } else {
+                //sticky
+                if (againRequest[rq] == Integer.MAX_VALUE) {
                     //최초 요청
-                    int target = 0;
-                    int min = Integer.MAX_VALUE;
-                    for (int j = 0; j < list.length; j++) {
-                        if (list[j].size() < min) {
-                            min = list[j].size();
-                            target = j;
-                        }
-                    }
                     list[target].add(rq);
-                    targetServers[rq] = target;
+                    againRequest[rq] = target;
                 } else {
-                    //다음 요청
-                    int target = targetServers[rq];
-                    last = target;
-                    list[target].add(rq);
+                    //중복 요청
+                    int oldTarget = againRequest[rq];
+                    list[oldTarget].add(rq);
+                    target = oldTarget;
                 }
             }
-        }
 
-
-        for (int i = 0; i < list.length; i++) {
-            answer[i] = new int[list[i].size()];
-            for (int j = 0; j < list[i].size(); j++) {
-                answer[i][j] = list[i].get(j);
+            target += 1;
+            if(target > servers){
+                target = 1;
             }
         }
 
+        for (int i = 1; i < list.length; i++) {
+            answer[i - 1] = new int[list[i].size()];
+            for (int j = 0; j < list[i].size(); j++) {
+                answer[i - 1][j] = list[i].get(j);
+            }
+        }
 
         return answer;
     }
@@ -138,9 +127,16 @@ public class Number1 {
 
         Solution s = new Solution();
         int[][] solution;
-        solution = s.solution2(2, false, new int[]{1, 2, 3, 4});
-        solution = s.solution2(2, true, new int[]{1, 1, 2, 2});
-        solution = s.solution2(2, true, new int[]{1, 2, 2, 3, 4, 1});
+//        solution = s.solution(2, false, new int[]{1, 2, 3, 4});
+//        solution = s.solution(2, true, new int[]{1, 1, 2, 2});
+        solution = s.solution(2, true, new int[]{1, 2, 2, 3, 4, 1});
+
+//        solution = s.solution(3, true, new int[]{1, 2, 2, 3, 4, 1});
+        //정답
+        //1번 1 4 1
+        //2번 2 2
+        //3번 3
+
 
 
         int answer, expect;

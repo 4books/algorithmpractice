@@ -5,6 +5,8 @@ Kadane's Algorithm
 https://leetcode.com/problems/maximum-subarray/
  */
 
+import java.math.BigDecimal;
+
 class Solution {
     public int maxSubArray(int[] nums) {
         int max = nums[0];

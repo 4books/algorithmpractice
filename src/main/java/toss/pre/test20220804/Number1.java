@@ -1,4 +1,4 @@
-package toss.pre.n1;
+package toss.pre.test20220804;
 /*
 
  */
@@ -79,32 +79,28 @@ class Solution {
             list[i] = new ArrayList<>();
         }
 
-        int[] againRequest = new int[requests.length + 1];
-        Arrays.fill(againRequest, Integer.MAX_VALUE);
+        int[] preTarget = new int[requests.length + 1];
+        Arrays.fill(preTarget, Integer.MAX_VALUE);
 
         int target = 1;
         for (int i = 0; i < requests.length; i++) {
             int rq = requests[i];
 
-            if (!sticky) {
-                //round robin
-                list[target].add(rq);
-            } else {
-                //sticky
-                if (againRequest[rq] == Integer.MAX_VALUE) {
+            //sticky
+            if(sticky){
+                if (preTarget[rq] == Integer.MAX_VALUE) {
                     //최초 요청
-                    list[target].add(rq);
-                    againRequest[rq] = target;
+                    preTarget[rq] = target;
                 } else {
                     //중복 요청
-                    int preTarget = againRequest[rq];
-                    list[preTarget].add(rq);
-                    target = preTarget;
+                    target = preTarget[rq];
                 }
             }
+            //기본은 round 로빈 방식
+            list[target].add(rq);
 
             target += 1;
-            if(target > servers){
+            if (target > servers) {
                 target = 1;
             }
         }
@@ -130,15 +126,22 @@ public class Number1 {
 //        solution = s.solution(2, false, new int[]{1, 2, 3, 4});
 //        solution = s.solution(2, true, new int[]{1, 1, 2, 2});
         solution = s.solution(2, true, new int[]{1, 2, 2, 3, 4, 1});
+        int[][] solution2 = s.solution2(2, true, new int[]{1, 2, 2, 3, 4, 1});
 
+        for (int i = 0; i < solution.length; i++) {
+            int[] row = solution[i];
+            for (int j = 0; j < row.length; j++) {
+                System.out.println(solution[i][j]);
+                System.out.println(solution2[i][j]);
+            }
+        }
 //        solution = s.solution(3, true, new int[]{1, 2, 2, 3, 4, 1});
         //정답
         //1번 1 4 1
         //2번 2 2
         //3번 3
 
-
-
+        System.out.println();
         int answer, expect;
 
 //        answer = s.solution(new int[]{1, 2});

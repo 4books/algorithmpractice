@@ -43,19 +43,12 @@ class Solution {
         int totalNum = dungeons.length;
         boolean[] visited = new boolean[totalNum];
 
-        dfs(totalNum, k, dungeons, visited, 0);
+        use(totalNum, k, dungeons, visited, 0);
 
         return answer;
     }
 
-    /**
-     * @param totalNum 총 던전수
-     * @param k        현재 피로도
-     * @param dungeons 던전들
-     * @param visited  해당 던전 방문 여부
-     * @param count    던전 방문 횟수
-     */
-    public void dfs(int totalNum, int k, int[][] dungeons, boolean[] visited, int count) {
+    public void use(int totalNum, int k, int[][] dungeons, boolean[] visited, int count) {
         //이미 모든 던전을 돌 수 있음
         if (totalNum == answer) {
             return;
@@ -65,7 +58,7 @@ class Solution {
             //방문하지 않은 던전이며, 현재 피로도가 최소 필요 피로도보다 클 때
             if (!visited[i] && k >= dungeons[i][0]) {
                 visited[i] = true;
-                dfs(totalNum, k - dungeons[i][1], dungeons, visited, count + 1);
+                use(totalNum, k - dungeons[i][1], dungeons, visited, count + 1);
                 visited[i] = false;
             }
             //해당 던전을 입장하지 못할 때

@@ -75,8 +75,9 @@ public class Main {
 
 
 
+
         String[] answer = s.solution(5, new int[]{9, 20, 28, 18, 11}, new int[]{30, 1, 21, 17, 28});
-        System.out.println();
+        System.out.println("한글 테스트");
     }
 
 }

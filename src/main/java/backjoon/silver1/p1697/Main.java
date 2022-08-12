@@ -24,39 +24,29 @@ public class Main {
         Queue<Integer> queue = new LinkedList<>();
         //일단 곱하기가 있으므로 1로 초기화
         queue.offer(S);
+
         visited[S] = 1;
 
-        int next, nTime;
+        int n;
         while (!queue.isEmpty()) {
-            Integer curr = queue.poll();
-            nTime = visited[curr] + 1;
+            n = queue.poll();
 
-            if (visited[E] != 0) {
+            if(n == E){
                 break;
             }
 
-            next = curr - 1;
-            if (next > 0) {
-                if (visited[next] == 0) {
-                    visited[next] = nTime;
-                    queue.offer(next);
-                }
+            if (n - 1 >= 0 && visited[n - 1] == 0) {
+                visited[n - 1] = visited[n] + 1;
+                queue.offer(n - 1);
             }
-            next = curr + 1;
-            if (next <= 100_000) {
-                if (visited[next] == 0) {
-                    visited[next] = nTime;
-                    queue.offer(curr);
-                }
+            if (n + 1 <= 100_000 && visited[n + 1] == 0) {
+                visited[n + 1] = visited[n] + 1;
+                queue.offer(n + 1);
             }
-            next = curr * 2;
-            if (next > 0 && next <= 100_000) {
-                if (visited[next] == 0) {
-                    visited[next] = nTime;
-                    queue.offer(next);
-                }
+            if (2 * n <= 100_000 && visited[2 * n] == 0) {
+                visited[2 * n] = visited[n] + 1;
+                queue.offer(2 * n);
             }
-
         }
 
         //최초에 1로 초기화 했으므로 -1

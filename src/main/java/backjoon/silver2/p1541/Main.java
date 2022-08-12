@@ -1,4 +1,4 @@
-package backjoon.sliver2.p1541;
+package backjoon.silver2.p1541;
 /*
 https://www.acmicpc.net/problem/1541
  */

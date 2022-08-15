@@ -38,8 +38,8 @@ public class Maximum_Depth_of_Binary_Tree {
             int answer = 0;
             while (!q.isEmpty()) {
                 answer++;
-
-                for (int i = 0; i < q.size(); i++) {
+                int size = q.size();
+                for (int i = 0; i < size; i++) {
                     TreeNode node = q.poll();
                     if (node.left != null) {
                         q.offer(node.left);
@@ -56,8 +56,24 @@ public class Maximum_Depth_of_Binary_Tree {
     }
 
     public static void main(String[] args) {
-        TreeNode right = new TreeNode(2);
-        TreeNode root = new TreeNode(1, null, right);
+        TreeNode root = new TreeNode(0);
+
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(4);
+
+        root.left.left = new TreeNode(1);
+        root.left.right = null;
+        root.right.left = new TreeNode(3);
+        root.right.right = new TreeNode(-1);
+
+        root.left.left.left = new TreeNode(5);
+        root.left.left.right = new TreeNode(1);
+        root.right.left.left = null;
+        root.right.left.right = new TreeNode(6);
+        root.right.right.left = null;
+        root.right.right.right = new TreeNode(8);
+
+
         Solution s = new Solution();
         int answer = s.maxDepth(root);
         System.out.println("answer = " + answer);

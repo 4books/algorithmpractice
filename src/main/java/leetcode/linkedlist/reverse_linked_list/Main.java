@@ -4,6 +4,7 @@ https://leetcode.com/problems/reverse-linked-list/
  */
 
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 // Definition for singly-linked list.
@@ -25,32 +26,55 @@ class ListNode {
 }
 
 class Solution {
-    public ListNode reverseList(ListNode head) {
+    public ListNode reverseList2(ListNode head) {
         ListNode node = head;
-        ListNode next = null;
 
         Stack<ListNode> stack = new Stack<>();
         while (node != null) {
             stack.push(node);
             node = node.next;
         }
-
-        if(!stack.isEmpty()){
+        //한글aa
+        if (!stack.isEmpty()) {
             head = stack.peek();
         }
         while (!stack.isEmpty()) {
             node = stack.pop();
 
-            if(stack.isEmpty()){
+            if (stack.isEmpty()) {
                 node.next = null;
             } else {
-                next = stack.peek();
-                node.next = next;
+                node.next = stack.peek();
             }
         }
 
 
         return head;
+    }
+
+    public ListNode reverseList(ListNode head) {
+
+        ListNode node = head;
+
+        LinkedList<ListNode> list = new LinkedList<>();
+
+        while (node != null && node.next != null) {
+            list.add(node);
+            node = node.next;
+        }
+        //마지막 next 가 null 인 node 추가
+        list.add(node);
+
+        for (int i = list.size() - 1; i > 0; i--) {
+            node = list.get(i);
+            node.next = list.get(i - 1);
+        }
+        //마지막 next 삭제
+        if (list.getFirst() != null) {
+            list.getFirst().next = null;
+        }
+
+        return list.getLast();
     }
 }
 

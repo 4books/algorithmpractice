@@ -1,6 +1,10 @@
 package leetcode.string;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Stack;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ValidParentheses {
     public static void main(String[] args) {
@@ -8,6 +12,12 @@ public class ValidParentheses {
         boolean valid = s.isValid("()[]{}");
         System.out.println("valid = " + valid);
     }
+
+    @Test
+    void isValidTest(){
+        assertThat(isValid("()[]{}")).isTrue();
+    }
+
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         for (char c : s.toCharArray()) {

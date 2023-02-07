@@ -3,11 +3,6 @@ package template.programmers;
 
  */
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 class Solution {
     public int solution(int[] nums) {
 
@@ -20,11 +15,11 @@ class Solution {
 
 public class Main {
 
-    Solution s = new Solution();
+    public static void main(String[] args) {
+        Solution s = new Solution();
 
-    @Test
-    void test(){
-        assertThat(s.solution(new int[]{1, 2})).isEqualTo(0);
     }
+
+
 
 }

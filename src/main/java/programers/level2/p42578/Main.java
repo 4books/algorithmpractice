@@ -47,8 +47,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-
-
     static class Solution {
 
         public int solution(String[][] clothes) {
@@ -64,7 +62,7 @@ public class Main {
             //headgear 2, eye wear 1
             // 각 1씩 더해서 조합의 수 구함 3*2
             for (String type : map.keySet()) {
-                answer *= map.get(type) + 1;
+                answer *= map.get(type) + 1; //해당 옷 종류를 입지 않은 경우도 추가
             }
             answer--; //아무것도 입지 않는건 위장하지 않는 것이므로 제외
             return answer;

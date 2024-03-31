@@ -57,7 +57,8 @@ public class Main {
         if (v == unf[v]) {
             return v;
         } else {
-            return unf[v] = Find(unf[v]);
+            unf[v] = Find(unf[v]);
+            return unf[v];
         }
     }
     static void Union(int a, int b) {

@@ -1,12 +1,23 @@
 package allra.p2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         String input = br.readLine();
-        System.out.println("Hello Goorm! Your input is " + input);
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int num = Integer.parseInt(st.nextToken());
+
+
+        bw.write(input);
+        bw.flush();
+
+        bw.close();
+        br.close();
     }
 }

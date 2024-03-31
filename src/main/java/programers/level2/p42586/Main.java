@@ -60,7 +60,7 @@ public class Main {
                     result.add(queue.size());
                     queue.clear();//queue 초기화
                 }
-                queue.offer(day);
+                queue.offer(day);//queue 남은 일 수 추가
             }
             //다 돌았는데 queue 에 값이 남은 경우
             if (!queue.isEmpty()) {

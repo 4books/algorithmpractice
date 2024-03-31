@@ -36,11 +36,7 @@ priorities	location	return
 import java.util.*;
 
 public class Main {
-
-
     static class Solution {
-
-
         public int solution(int[] priorities, int location) {
             int answer = 0;
 
@@ -52,9 +48,10 @@ public class Main {
             }
 
             while (!queue.isEmpty()) {
+                Integer priority = queue.peek();
                 for (int i = 0; i < priorities.length; i++) {
                     //queue 의 가장 큰값 과 동일하면 해당 노드를 제외하고 answer(index) 를 추가한다.
-                    if (queue.peek() == priorities[i]) {
+                    if (priority == priorities[i]) {
                         answer++;
                         if (i == location) {
                             return answer;
@@ -66,7 +63,42 @@ public class Main {
 
             return -1;
         }
+    }
 
+
+    static class Solution2 {
+        public int solution(int[] priorities, int location) {
+            // 1. List로 만들기
+            List<PrintJob> printer = new ArrayList<PrintJob>();
+            for (int i = 0; i < priorities.length; i++)
+                printer.add(new PrintJob(i, priorities[i]));
+
+            int turn = 0;
+            while (!printer.isEmpty()) {
+                // 2. 0번을 꺼내서 max priority가 아니면 다시 끝에 넣기
+                PrintJob job = printer.remove(0);
+                if (printer.stream().anyMatch(otherJob -> job.priority < otherJob.priority)) {
+                    printer.add(job);
+                } else {
+                    turn++;
+                    // 3. max Priority가 맞다면 내가 찾는 job이 맞는지 확인하기
+                    if (location == job.location)
+                        break;
+                }
+            }
+
+            return turn;
+        }
+
+        class PrintJob {
+            int priority;
+            int location;
+
+            public PrintJob(int location, int priority) {
+                this.location = location;
+                this.priority = priority;
+            }
+        }
     }
 
     public static void main(String[] args) {

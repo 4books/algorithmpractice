@@ -1,6 +1,6 @@
 package doit.arrayandlist;
 
-public class Q002 {
+public class Q3_1_002 {
     public static double solution(int n, int[] scores){
 
         long sum = 0;

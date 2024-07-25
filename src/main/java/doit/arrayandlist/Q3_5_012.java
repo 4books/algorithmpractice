@@ -29,9 +29,9 @@ public class Q3_5_012 {
             arr[i] = Integer.parseInt(str[i]);
         }
         Stack<Integer> stack = new Stack<>();
-        stack.push(0);
+        stack.push(0); //비어 있으므로 넣어줌
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
                 result[stack.pop()] = arr[i];
             }

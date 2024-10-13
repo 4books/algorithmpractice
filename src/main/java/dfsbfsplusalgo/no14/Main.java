@@ -79,8 +79,8 @@ public class Main {
     static int answer = Integer.MAX_VALUE;
 
     //level == m 선택되는 피자집 수
-    //s 다음으로 선택되는 피자집
-    public static void dfs(int level, int s) {
+    //start 다음으로 선택되는 피자집
+    public static void dfs(int level, int start) {
         if(level == m){ //살릴 피자집의 조합이 되었을 때
             int sum = 0;
             //집들을 가져옴
@@ -98,7 +98,7 @@ public class Main {
             //sum 이 현재 최소피자배달거리보다 작다면 바꿔줌
             answer = Math.min(answer, sum);
         } else {
-            for (int i = s; i < len; i++) { //피자 조합을 뽑는 것 (Combination)
+            for (int i = start; i < len; i++) { //피자 조합을 뽑는 것 (Combination)
                 combination[level] = i;
                 dfs(level + 1, i + 1);
             }

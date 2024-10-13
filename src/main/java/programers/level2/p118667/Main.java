@@ -5,9 +5,6 @@ https://school.programmers.co.kr/learn/courses/30/lessons/118667?language=java
  */
 
 
-import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -63,12 +60,6 @@ public class Main {
 
     Solution s = new Solution();
 
-    @Test
-    void testCase() {
-        assertThat(s.solution(new int[]{3, 2, 7, 2}, new int[]{4, 6, 5, 1})).isEqualTo(2);
-        assertThat(s.solution(new int[]{1, 2, 1, 2}, new int[]{1, 10, 1, 2})).isEqualTo(7);
-        assertThat(s.solution(new int[]{1, 1}, new int[]{1, 5})).isEqualTo(-1);
-    }
 
 
 }

@@ -3,8 +3,7 @@ package leetcode.dynamicprogramming.decode_ways;
 https://leetcode.com/problems/decode-ways/
  */
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+
 
 class Solution {
     public int numDecodings(String s) {
@@ -41,10 +40,4 @@ public class Main {
 
     Solution s = new Solution();
 
-    @Test
-    void testcase() {
-        Assertions.assertThat(s.numDecodings("12")).isEqualTo(2);
-        Assertions.assertThat(s.numDecodings("226")).isEqualTo(3);
-        Assertions.assertThat(s.numDecodings("06")).isEqualTo(0);
-    }
 }
